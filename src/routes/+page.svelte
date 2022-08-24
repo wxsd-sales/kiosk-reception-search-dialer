@@ -44,47 +44,47 @@
       .catch(() => fallbackWeather);
 
   const people = {
-    amryan: {
-      id: 'amryan',
-      image: 'avatars/amryan.png',
-      name: 'Amy Ryan',
-      status: 'DoNotDisturb',
-      title: 'Technical Solutions Specialist'
-    },
-    ahauge: {
-      id: 'ahauge',
-      image: 'avatars/ahauge.png',
-      name: 'Annemarie Hauge',
-      status: 'call',
-      title: 'Technical Solutions Specialist'
-    },
-    hachawla: {
-      id: 'hachawla',
-      image: 'avatars/hachawla.png',
-      name: 'Harish Chawla',
-      status: 'active',
-      title: 'Technical Solutions Specialist'
-    },
-    jlaurens: {
-      id: 'jlaurens',
-      image: 'avatars/jlaurens.png',
-      name: 'Jeremy Laurenson',
-      status: 'active',
-      title: 'Technical Solutions Specialist'
-    },
     skjesbu: {
       id: 'skjesbu',
       image: 'avatars/skjesbu.png',
       name: 'Snorre Kjesbu',
       status: 'active',
-      title: 'Technical Solutions Specialist'
+      title: 'CEO'
+    },
+    amryan: {
+      id: 'amryan',
+      image: 'avatars/amryan.png',
+      name: 'Amy Ryan',
+      status: 'DoNotDisturb',
+      title: 'Head of Work Tech'
     },
     lindwhit: {
       id: 'lindwhit',
       image: 'avatars/lindwhit.png',
       name: 'Linda White',
       status: 'active',
-      title: 'Technical Solutions Specialist'
+      title: 'Chief of Staff'
+    },
+    ahauge: {
+      id: 'ahauge',
+      image: 'avatars/ahauge.png',
+      name: 'Annemarie Hauge',
+      status: 'call',
+      title: 'Customer Relations'
+    },
+    jlaurens: {
+      id: 'jlaurens',
+      image: 'avatars/jlaurens.png',
+      name: 'Jeremy Laurenson',
+      status: 'active',
+      title: 'Engineering Lead'
+    },
+    hachawla: {
+      id: 'hachawla',
+      image: 'avatars/hachawla.png',
+      name: 'Harish Chawla',
+      status: 'active',
+      title: 'Technical Leader'
     }
   };
 
