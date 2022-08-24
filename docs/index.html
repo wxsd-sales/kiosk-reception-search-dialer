@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/kiosk-reception-demo/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="content-security-policy" content="">
+	<link rel="modulepreload" href="/kiosk-reception-demo/_app/immutable/start-df87dc3c.js">
+	<link rel="modulepreload" href="/kiosk-reception-demo/_app/immutable/chunks/singletons-3e8c76bf.js">
+  </head>
+  <body>
+    <div>
+		<script type="module" data-sveltekit-hydrate="45h">
+		import { set_public_env, start } from "/kiosk-reception-demo/_app/immutable/start-df87dc3c.js";
+
+		set_public_env({});
+
+		start({
+			target: document.querySelector('[data-sveltekit-hydrate="45h"]').parentNode,
+			paths: {"base":"/kiosk-reception-demo","assets":"/kiosk-reception-demo"},
+			route: true,
+			spa: true,
+			trailing_slash: "never",
+			hydrate: null
+		});
+	</script></div>
+  </body>
+</html>
