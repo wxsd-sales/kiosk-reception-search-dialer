@@ -55,7 +55,7 @@
       id: 'amryan',
       image: 'avatars/amryan.png',
       name: 'Amy Ryan',
-      status: 'DoNotDisturb',
+      status: 'meeting',
       title: 'Head of Work Tech'
     },
     lindwhit: {
@@ -76,7 +76,7 @@
       id: 'jlaurens',
       image: 'avatars/jlaurens.png',
       name: 'Jeremy Laurenson',
-      status: 'active',
+      status: 'DoNotDisturb',
       title: 'Engineering Lead'
     },
     hachawla: {
