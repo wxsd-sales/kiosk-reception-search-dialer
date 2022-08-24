@@ -157,21 +157,31 @@
         <div class="has-ratio">
           <PersonCard {...activePersonModel}>
             <div class="control has-icons-left is-expanded block">
-              <input class="input is-rounded" placeholder="Your Name" bind:value={from} disabled={isLoading} />
+              <input
+                class="input is-rounded is-medium"
+                placeholder="Your Name"
+                bind:value={from}
+                disabled={isLoading}
+              />
               <span class="icon is-large is-left">
                 <i class="mdi mdi-24px mdi-account" />
               </span>
             </div>
-            <div class="field is-grouped block">
+            <div class="field has-addons block">
               <div class="control has-icons-left is-expanded">
-                <input class="input is-rounded" placeholder="Your Message" bind:value={message} disabled={isLoading} />
+                <div class="select is-rounded is-medium is-fullwidth">
+                  <select bind:value={message} disabled={isLoading}>
+                    <option value="I am here!" selected>I am here!</option>
+                    <option value="I need assistance.">I need assistance.</option>
+                  </select>
+                </div>
                 <span class="icon is-large is-left">
                   <i class="mdi mdi-24px mdi-text" />
                 </span>
               </div>
               <div class="control">
                 <button
-                  class="button is-primary has-background-dark is-inverted is-rounded"
+                  class="button is-primary has-background-dark is-inverted is-rounded is-medium"
                   type="button"
                   disabled={from == null || message == null}
                   class:is-loading={isLoading}
