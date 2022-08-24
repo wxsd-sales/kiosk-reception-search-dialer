@@ -46,42 +46,42 @@
   const people = {
     skjesbu: {
       id: 'skjesbu',
-      image: 'avatars/skjesbu.png',
+      image: '/avatars/skjesbu.png',
       name: 'Snorre Kjesbu',
       status: 'meeting',
       title: 'CEO'
     },
     amryan: {
       id: 'amryan',
-      image: 'avatars/amryan.png',
+      image: '/avatars/amryan.png',
       name: 'Amy Ryan',
       status: 'active',
       title: 'Head of Work Tech'
     },
     lindwhit: {
       id: 'lindwhit',
-      image: 'avatars/lindwhit.png',
+      image: '/avatars/lindwhit.png',
       name: 'Linda White',
       status: 'meeting',
       title: 'Chief of Staff'
     },
     ahauge: {
       id: 'ahauge',
-      image: 'avatars/ahauge.png',
+      image: '/avatars/ahauge.png',
       name: 'Annemarie Hauge',
       status: 'call',
       title: 'Customer Relations'
     },
     jlaurens: {
       id: 'jlaurens',
-      image: 'avatars/jlaurens.png',
+      image: '/avatars/jlaurens.png',
       name: 'Jeremy Laurenson',
       status: 'DoNotDisturb',
       title: 'Engineering Lead'
     },
     hachawla: {
       id: 'hachawla',
-      image: 'avatars/hachawla.png',
+      image: '/avatars/hachawla.png',
       name: 'Harish Chawla',
       status: 'meeting',
       title: 'Technical Leader'
@@ -106,7 +106,7 @@
   }
 </script>
 
-<Background imageLink="photo-1568738009519-52d1bad47858.webp" />
+<Background imageLink="/background.webp" />
 
 <section id="hero" class="hero is-fullheight has-text-white is-dark">
   <!-- hero-head start -->
@@ -115,7 +115,7 @@
       <div class="container is-block">
         <div class="columns m-0">
           <div id="brand" class="column is-7 is-flex is-align-self-center">
-            <Brand title="font_rend-removebg-preview.png" subtitle="Bridge to Possible." />
+            <Brand title="/logo.png" subtitle="Bridge to Possible." />
           </div>
           <div id="weather" class="column is-5 is-align-self-center">
             <Weather {getWeatherResponse} {cityId}>
