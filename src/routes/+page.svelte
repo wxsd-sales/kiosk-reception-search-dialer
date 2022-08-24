@@ -1,6 +1,14 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { fade } from 'svelte/transition';
+  import background from '$lib/assets/background.webp';
+  import logo from '$lib/assets/logo.png';
+  import skjesbu from '$lib/assets/avatars/skjesbu.png';
+  import amryan from '$lib/assets/avatars/amryan.png';
+  import lindwhit from '$lib/assets/avatars/lindwhit.png';
+  import ahauge from '$lib/assets/avatars/ahauge.png';
+  import jlaurens from '$lib/assets/avatars/jlaurens.png';
+  import hachawla from '$lib/assets/avatars/hachawla.png';
 
   import Background from '../components/Background/Background.svelte';
   import Brand from '../components/Brand/Brand.svelte';
@@ -46,42 +54,42 @@
   const people = {
     skjesbu: {
       id: 'skjesbu',
-      image: '/avatars/skjesbu.png',
+      image: skjesbu,
       name: 'Snorre Kjesbu',
       status: 'meeting',
       title: 'CEO'
     },
     amryan: {
       id: 'amryan',
-      image: '/avatars/amryan.png',
+      image: amryan,
       name: 'Amy Ryan',
       status: 'active',
       title: 'Head of Work Tech'
     },
     lindwhit: {
       id: 'lindwhit',
-      image: '/avatars/lindwhit.png',
+      image: lindwhit,
       name: 'Linda White',
       status: 'meeting',
       title: 'Chief of Staff'
     },
     ahauge: {
       id: 'ahauge',
-      image: '/avatars/ahauge.png',
+      image: ahauge,
       name: 'Annemarie Hauge',
       status: 'call',
       title: 'Customer Relations'
     },
     jlaurens: {
       id: 'jlaurens',
-      image: '/avatars/jlaurens.png',
+      image: jlaurens,
       name: 'Jeremy Laurenson',
       status: 'DoNotDisturb',
       title: 'Engineering Lead'
     },
     hachawla: {
       id: 'hachawla',
-      image: '/avatars/hachawla.png',
+      image: hachawla,
       name: 'Harish Chawla',
       status: 'meeting',
       title: 'Technical Leader'
@@ -106,7 +114,7 @@
   }
 </script>
 
-<Background imageLink="/background.webp" />
+<Background imageLink={background} />
 
 <section id="hero" class="hero is-fullheight has-text-white is-dark">
   <!-- hero-head start -->
@@ -115,7 +123,7 @@
       <div class="container is-block">
         <div class="columns m-0">
           <div id="brand" class="column is-7 is-flex is-align-self-center">
-            <Brand title="/logo.png" subtitle="Bridge to Possible." />
+            <Brand title={logo} subtitle="Bridge to Possible." />
           </div>
           <div id="weather" class="column is-5 is-align-self-center">
             <Weather {getWeatherResponse} {cityId}>
