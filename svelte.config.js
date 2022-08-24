@@ -19,6 +19,7 @@ const config = {
     paths: {
       base: dev ? '' : '/kiosk-reception-demo'
     },
+    appDir: 'internal',
     adapter: adapter({
       fallback: 'index.html',
       pages: 'docs',
