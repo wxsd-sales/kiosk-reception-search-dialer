@@ -44,38 +44,44 @@
       .catch(() => fallbackWeather);
 
   const people = {
-    amy: {
-      image: 'avatars/amy.png',
+    amryan: {
+      id: 'amryan',
+      image: 'avatars/amryan.png',
       name: 'Amy Ryan',
       status: 'DoNotDisturb',
       title: 'Technical Solutions Specialist'
     },
-    anne: {
-      image: 'avatars/anne.png',
+    ahauge: {
+      id: 'ahauge',
+      image: 'avatars/ahauge.png',
       name: 'Annemarie Hauge',
       status: 'call',
       title: 'Technical Solutions Specialist'
     },
-    harish: {
-      image: 'avatars/harish.png',
+    hachawla: {
+      id: 'hachawla',
+      image: 'avatars/hachawla.png',
       name: 'Harish Chawla',
       status: 'active',
       title: 'Technical Solutions Specialist'
     },
-    jeremy: {
-      image: 'avatars/jeremy.png',
+    jlaurens: {
+      id: 'jlaurens',
+      image: 'avatars/jlaurens.png',
       name: 'Jeremy Laurenson',
       status: 'active',
       title: 'Technical Solutions Specialist'
     },
-    snorre: {
-      image: 'avatars/snorre.png',
+    skjesbu: {
+      id: 'skjesbu',
+      image: 'avatars/skjesbu.png',
       name: 'Snorre Kjesbu',
       status: 'active',
       title: 'Technical Solutions Specialist'
     },
-    linda: {
-      image: 'avatars/linda.png',
+    lindwhit: {
+      id: 'lindwhit',
+      image: 'avatars/lindwhit.png',
       name: 'Linda White',
       status: 'active',
       title: 'Technical Solutions Specialist'

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Avatar from '../Avatar/Avatar.svelte';
 
+  export let id;
   export let name;
   export let image;
   export let status = 'active';
@@ -35,11 +36,14 @@
               </button>
             </p>
             <p class="control">
-              <button class="button is-fullwidth is-rounded is-success has-background-dark is-inverted phone">
+              <a
+                class="button is-fullwidth is-rounded is-success has-background-dark is-inverted phone"
+                href="sip:{id}@cisco.com"
+              >
                 <span class="icon">
                   <i class="mdi mdi-24px mdi-phone" />
                 </span>
-              </button>
+              </a>
             </p>
           </div>
         </div>
