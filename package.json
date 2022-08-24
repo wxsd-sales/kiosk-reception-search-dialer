@@ -14,7 +14,7 @@
   "devDependencies": {
     "@bybas/weather-icons": "^2.0.0",
     "@mdi/font": "^6.9.96",
-    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-static": "next",
     "@sveltejs/kit": "next",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
