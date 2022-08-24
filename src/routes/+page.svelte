@@ -48,21 +48,21 @@
       id: 'skjesbu',
       image: 'avatars/skjesbu.png',
       name: 'Snorre Kjesbu',
-      status: 'active',
+      status: 'meeting',
       title: 'CEO'
     },
     amryan: {
       id: 'amryan',
       image: 'avatars/amryan.png',
       name: 'Amy Ryan',
-      status: 'meeting',
+      status: 'active',
       title: 'Head of Work Tech'
     },
     lindwhit: {
       id: 'lindwhit',
       image: 'avatars/lindwhit.png',
       name: 'Linda White',
-      status: 'active',
+      status: 'meeting',
       title: 'Chief of Staff'
     },
     ahauge: {
@@ -83,7 +83,7 @@
       id: 'hachawla',
       image: 'avatars/hachawla.png',
       name: 'Harish Chawla',
-      status: 'active',
+      status: 'meeting',
       title: 'Technical Leader'
     }
   };
