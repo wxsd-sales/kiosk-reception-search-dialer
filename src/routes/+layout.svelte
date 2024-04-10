@@ -107,8 +107,7 @@
 <footer class="footer has-background-grey-lighter">
   <div class="content has-text-centered">
     <p>
-      <strong>Cisco Impact Kiosk Reception Demo</strong> by
-      <a href="https://github.com/wxsd-sales" target="_blank" referrerpolicy="no-referrer">WXSD-Sales</a>.<br />
+      <strong>Kiosk Reception Demo PoC</strong> by WXSD-Sales.<br />
       &copy; {new Date().getUTCFullYear()} Webex by Cisco
     </p>
   </div>
