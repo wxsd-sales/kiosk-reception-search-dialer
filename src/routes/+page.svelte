@@ -35,7 +35,9 @@
         icon: r.weather[0].icon
       }));
   const getPersonResponse = (email: string) =>
-    fetch(webexApiUrl + `/people?email=${email}`, { headers: { Authorization: 'Bearer ' + webexToken } })
+    fetch(webexApiUrl + `/people?email=${encodeURIComponent(email)}`, {
+      headers: { Authorization: 'Bearer ' + webexToken }
+    })
       .then((r) => (r.status >= 400 ? Promise.reject(r) : r))
       .then((r) => r.json())
       .then((r) => (r?.items.length != 1 ? Promise.reject(r) : r.items[0]))
