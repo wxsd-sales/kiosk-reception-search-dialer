@@ -25,7 +25,7 @@ Kiosk and PWA (Persistent Web App) are new modes that make use of the in-built W
 
 ## Overview
 
-This application allows you to customize the contact cards, brand logo, background, etc. that make up the UI/controls of a RoomOS device in PWA/Kiosk device. You can create multiple URLs and activate them on a compatible device of your choice. Once activated, the application uses [cloud xAPI requests](https://roomos.cisco.com/docs/Introduction.md#the-xapi) with a Webex Bot token to control the device (make calls, get room analytics data, etc.).
+This application allows you to customize the contact cards, brand logo, background, etc. that make up the UI/controls of a RoomOS device in PWA/Kiosk device. You can create multiple URLs and activate them on a compatible device of your choice. Once activated, the application uses [cloud xAPI requests](https://roomos.cisco.com/docs/Introduction.md#the-xapi) with a Webex Bot token to control the device (make calls, etc.).
 
 ## Setup
 
