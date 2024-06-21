@@ -48,7 +48,6 @@ These instructions assume that you have administrator access to an Org's Webex C
    - Set the value for `WebEngine > Mode` to `On`
    
    Additionally, if running in Kiosk Mode (Desk and Board series devices):
-   - Set the value for `WebEngine > Features > SipUrlHandler` to `On`
    - Set the value for `UserInterface > Kiosk > URL` to the URL you created in Step 4 above
    - Set the value for `UserInterface > Kiosk > Mode` to `On`
 
