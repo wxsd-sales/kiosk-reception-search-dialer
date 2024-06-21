@@ -46,8 +46,6 @@ These instructions assume that you have administrator access to an Org's Webex C
 5. Visit the org's [Control Hub device page](https://admin.webex.com/devices), choose your device and make the following changes using the "All configuration" link:
    - Set the value for `NetworkServices > HTTP > Mode` to `HTTP+HTTPS`
    - Set the value for `WebEngine > Mode` to `On`
-   - Set the value for `RoomAnalytics > AmbientNoiseEstimation > Mode` to `On`
-   - Set the value for `RoomAnalytics > PeoplePresenceDetector` to `On`
    
    Additionally, if running in Kiosk Mode (Desk and Board series devices):
    - Set the value for `WebEngine > Features > SipUrlHandler` to `On`
