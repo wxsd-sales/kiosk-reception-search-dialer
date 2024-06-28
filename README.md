@@ -57,7 +57,7 @@ These instructions assume that you have administrator access to an Org's Webex C
 
 ## Demo
 
-A video where we demo this PoC is available on Vidcast — TODO.
+A demo is not availabe at this time.
 
 ## Support
 
