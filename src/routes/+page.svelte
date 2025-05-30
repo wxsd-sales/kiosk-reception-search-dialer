@@ -6,6 +6,7 @@
   import Weather from '../components/Weather/Weather.svelte';
   import Clock from '../components/Clock/Clock.svelte';
   import PersonCard from '../components/PersonCard/PersonCard.svelte';
+  import Dialer from '../components/Dialer/Dialer.svelte';
 
   const webexApiUrl = 'https://webexapis.com/v1';
   const webexToken = $page.url.searchParams.get('webexToken');
@@ -62,6 +63,11 @@
       body: JSON.stringify({ deviceId, arguments: { Number: number, Protocol: 'Sip' } })
     });
   }
+  function handleDialerCall(event) {
+  const { number } = event.detail;
+  handleDial(number); // Reuse your existing dial logic
+  }
+
 </script>
 
 <Background imageLink={background} />
@@ -94,6 +100,26 @@
   <!-- hero-body start -->
   <div id="body-widgets" class="hero-body py-2">
     <div class="container">
+      <div class="columns is-vcentered is-flex-grow-1">
+        <!-- Person Cards Column -->
+        <div class="column">
+          <div class="columns is-multiline is-centered">
+            {#each people as person}
+              <div class="column is-6 is-flex is-justify-content-center">
+                <PersonCard email={person[0]} {getPersonResponse} onDial={() => handleDial(person?.[1] ?? person[0])} />
+              </div>
+            {/each}
+          </div>
+        </div>
+        
+        <!-- Dialer Column -->
+        <div class="column is-narrow">
+          <Dialer on:call={handleDialerCall} />
+        </div>
+      </div>
+    </div>
+    <!-- original container
+    <div class="container">
       <div class="columns is-multiline is-centered is-vcentered is-flex-grow-1">
         {#each people as person}
           <div class="column is-4 is-flex is-justify-content-center">
@@ -102,6 +128,8 @@
         {/each}
       </div>
     </div>
+    -->
+  
   </div>
   <!-- hero-body end -->
   <!-- hero-foot start -->
