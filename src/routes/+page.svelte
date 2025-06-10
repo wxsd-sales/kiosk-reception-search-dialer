@@ -121,7 +121,7 @@
         <!-- Dialer Column -->
         <div class="column is-narrow">
           {#if showDialer}
-            <Dialer on:call={handleDialerCall} />
+            <Dialer on:call={handleDialerCall} on:close={() => showDialer = false} />
           {:else}
             <div class="card is-translucent-black">
               <div class="card-content">

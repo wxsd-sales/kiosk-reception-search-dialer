@@ -55,21 +55,42 @@
       currentNumber = number;
       makeCall();
     }
+
+    function closeDialer() {
+      dispatch('close');
+    }
   </script>
   
   <div class="card is-translucent-black">
     <div class="card-content">
       <div class="content">
-        <!-- Header -->
-        <div class="has-text-centered mb-4">
-          <h2 class="title is-size-5 has-text-white">
-            <span class="icon">
-              <i class="mdi mdi-phone"></i>
-            </span>
-            Dialer
-          </h2>
+       <!-- Header with close button -->
+      <div class="level mb-4">
+        <div class="level-left">
+          <div class="level-item">
+            <h2 class="title is-size-5 has-text-white">
+              <span class="icon">
+                <i class="mdi mdi-phone"></i>
+              </span>
+              Dialer
+            </h2>
+          </div>
         </div>
-  
+        <div class="level-right">
+          <div class="level-item">
+            <button 
+              class="button is-small is-dark"
+              on:click={closeDialer}
+              title="Close dialer"
+            >
+              <span class="icon is-small">
+                <i class="mdi mdi-close"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
         <!-- Number Display -->
         <div class="field mb-4">
           <div class="control">
