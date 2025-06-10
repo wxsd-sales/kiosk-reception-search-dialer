@@ -84,37 +84,32 @@
     
     // Set loading state
     isSearching = true;
+
+    fetch(webexApiUrl + `/people?displayName=${query}&callingData=true`, {
+      method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + webexToken, 'Content-Type': 'application/json' }
+    })
+      .then((r) => (r.status >= 400 ? Promise.reject(r) : r))
+      .then((r) => r.json())
+      .then((r) => {
+        searchResults = r.items;
+        console.log(searchResults);
+      })
+      .catch((e) => console.error(e));
     
-    // TODO: Implement your actual search logic here
-    // For now, just simulate a search
-    setTimeout(() => {
-      // Mock results - replace with your actual search implementation
-      if (query.trim()) {
-        searchResults = [
-          {
-            displayName: 'John Doe',
-            email: 'john.doe@company.com',
-            department: 'Engineering'
-          },
-          {
-            displayName: 'Jane Smith', 
-            email: 'jane.smith@company.com',
-            department: 'Marketing'
-          }
-        ].filter(user => 
-          user.displayName.toLowerCase().includes(query.toLowerCase()) ||
-          user.email.toLowerCase().includes(query.toLowerCase())
-        );
-      } else {
-        searchResults = [];
-      }
-      isSearching = false;
-    }, 500);
   }
 
   function handleUserSelected(event) {
     const { user } = event.detail;
     console.log('User selected:', user);
+    const listofPhoneNumbers = user.phoneNumbers;
+    console.log(listofPhoneNumbers);
+    const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work_extension')?.value;
+    if (workExtension) {
+      console.log('Dialing:', workExtension);
+      // handleDial(workExtension);
+      isSearching = false;
+    }
     
     // TODO: Implement what happens when a user is selected
     // Maybe show their details, dial them, etc.
