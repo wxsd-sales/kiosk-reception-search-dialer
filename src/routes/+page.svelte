@@ -56,6 +56,8 @@
   let isLoading = false;
   let from = undefined;
 
+  let showDialer = false;
+
   function handleDial(number: string) {
     fetch(webexApiUrl + `/xapi/command/Dial`, {
       method: 'post',
@@ -66,6 +68,10 @@
   function handleDialerCall(event) {
   const { number } = event.detail;
   handleDial(number); // Reuse your existing dial logic
+  }
+
+  function toggleDialer() {
+    showDialer = !showDialer;
   }
 
 </script>
@@ -114,8 +120,28 @@
         
         <!-- Dialer Column -->
         <div class="column is-narrow">
-          <Dialer on:call={handleDialerCall} />
+          {#if showDialer}
+            <Dialer on:call={handleDialerCall} />
+          {:else}
+            <div class="card is-translucent-black">
+              <div class="card-content">
+                <div class="content has-text-centered">
+                  <button 
+                    class="button is-success is-large is-rounded"
+                    on:click={toggleDialer}
+                  >
+                    <span class="icon">
+                      <i class="mdi mdi-phone-plus"></i>
+                    </span>
+                    <span>Manual Dial</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          {/if}
         </div>
+      
+      
       </div>
     </div>
     <!-- original container
