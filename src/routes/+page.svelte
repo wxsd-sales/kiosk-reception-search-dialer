@@ -7,6 +7,7 @@
   import Clock from '../components/Clock/Clock.svelte';
   import PersonCard from '../components/PersonCard/PersonCard.svelte';
   import Dialer from '../components/Dialer/Dialer.svelte';
+  import Search from '../components/Search/Search.svelte';
 
   const webexApiUrl = 'https://webexapis.com/v1';
   const webexToken = $page.url.searchParams.get('webexToken');
@@ -58,6 +59,9 @@
 
   let showDialer = false;
 
+  let searchResults = [];
+  let isSearching = false;
+
   function handleDial(number: string) {
     fetch(webexApiUrl + `/xapi/command/Dial`, {
       method: 'post',
@@ -72,6 +76,48 @@
 
   function toggleDialer() {
     showDialer = !showDialer;
+  }
+
+  function handleDirectorySearch(event) {
+    const { query } = event.detail;
+    console.log('Searching for:', query);
+    
+    // Set loading state
+    isSearching = true;
+    
+    // TODO: Implement your actual search logic here
+    // For now, just simulate a search
+    setTimeout(() => {
+      // Mock results - replace with your actual search implementation
+      if (query.trim()) {
+        searchResults = [
+          {
+            displayName: 'John Doe',
+            email: 'john.doe@company.com',
+            department: 'Engineering'
+          },
+          {
+            displayName: 'Jane Smith', 
+            email: 'jane.smith@company.com',
+            department: 'Marketing'
+          }
+        ].filter(user => 
+          user.displayName.toLowerCase().includes(query.toLowerCase()) ||
+          user.email.toLowerCase().includes(query.toLowerCase())
+        );
+      } else {
+        searchResults = [];
+      }
+      isSearching = false;
+    }, 500);
+  }
+
+  function handleUserSelected(event) {
+    const { user } = event.detail;
+    console.log('User selected:', user);
+    
+    // TODO: Implement what happens when a user is selected
+    // Maybe show their details, dial them, etc.
   }
 
 </script>
@@ -107,6 +153,15 @@
   <div id="body-widgets" class="hero-body py-2">
     <div class="container">
       <div class="columns is-vcentered is-flex-grow-1">
+        <!-- Directory Search Column (leftmost) -->
+        <div class="column is-narrow">
+          <Search 
+            searchResults={searchResults}
+            isLoading={isSearching}
+            on:search={handleDirectorySearch}
+            on:userSelected={handleUserSelected}
+          />
+        </div>
         <!-- Person Cards Column -->
         <div class="column">
           <div class="columns is-multiline is-centered">
