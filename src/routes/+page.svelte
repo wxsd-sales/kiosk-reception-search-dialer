@@ -104,7 +104,7 @@
     console.log('User selected:', user);
     const listofPhoneNumbers = user.phoneNumbers;
     console.log(listofPhoneNumbers);
-    const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work_extension')?.value;
+    const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value;
     if (workExtension) {
       console.log('Dialing:', workExtension);
       // handleDial(workExtension);
