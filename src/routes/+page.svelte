@@ -107,7 +107,7 @@
     const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value;
     if (workExtension) {
       console.log('Dialing:', workExtension);
-      // handleDial(workExtension);
+      handleDial(workExtension);
       isSearching = false;
     }
     
