@@ -21,6 +21,14 @@
     ?.map((r) => r.split(':'));
   const background = $page.url.searchParams.get('background') ?? 'photo-1568738009519-52d1bad47858.webp';
   const logo = $page.url.searchParams.get('logo') ?? 'font_rend-removebg-preview.png';
+
+  if (!people || people.length === 0) {
+    throw new Error ('Missing people as URL parameter');
+  }
+  else {
+    console.log('Vars loaded: ', {webexToken, deviceId, owmToken, owmCityId, people});
+  }
+ 
   const getWeatherResponse = (cityId: number, units: 'imperial' | 'standard') =>
     fetch(owmApiUrl + '?' + new URLSearchParams({ appid: owmToken, id: owmCityId, units: units }))
       .then((r) => (r.status >= 400 ? Promise.reject(r) : r))
@@ -103,7 +111,7 @@
     const { user } = event.detail;
     console.log('User selected:', user);
     const listofPhoneNumbers = user.phoneNumbers;
-    console.log(listofPhoneNumbers);
+    console.log('List of user phone numbers',listofPhoneNumbers);
     const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value;
     if (workExtension) {
       console.log('Dialing:', workExtension);
