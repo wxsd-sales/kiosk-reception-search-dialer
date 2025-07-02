@@ -169,13 +169,13 @@
       </div>
       
       <!-- Person Cards Column (center area) -->
-      <div class="column">
+      <div class="column person-card-bottom">
         <div class="columns is-multiline is-centered">
           {#each people as person}
-            <div class="column is-4 is-flex is-justify-content-center">
-              <div class="person-card-small">
+            <div class="column is-4 is-flex is-justify-content-center" style="width: 50%;">
+             
                 <PersonCard email={person[0]} {getPersonResponse} onDial={() => handleDial(person?.[1] ?? person[0])} />
-              </div>
+             
             </div>
           {/each}
         </div>
@@ -312,13 +312,14 @@
     max-width: 320px;
   }
 
+  
+  /* not used now */
   .person-card-small :global(.card) {
     transform: scale(0.85);
     transform-origin: center;
     /* max-height: 280px;  */
     overflow: hidden;
   }
-
 /* Make search column flex and push search to bottom */
   .search-column {
     display: flex !important;
@@ -330,11 +331,14 @@
   .search-bottom {
     margin-top: auto; /* This pushes it to the bottom */
   }
+  .person-card-bottom {
+    margin-top: auto; /* This pushes it to the bottom */
+  }
 
-  /* Ensure dialer column has proper spacing */
   .dialer-column {
     display: flex !important;
     justify-content: flex-end;
+    margin-top: auto; 
 }
 
 </style>
