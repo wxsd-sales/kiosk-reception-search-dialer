@@ -4,7 +4,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 const config = {
   plugins: [sveltekit()],
   preview: {
-    allowedHosts: ['eabd-2a0c-5a87-3400-5d00-980e-263d-8dbb-a53f.ngrok-free.app'],
+    allowedHosts: ['https://1203-84-78-249-115.ngrok-free.app/'],
     /**
     host: true,
     port: 4173,

@@ -176,30 +176,30 @@
           </div>
         </div>
         
-        <!-- Dialer Column -->
-        <div class="column is-narrow">
-          {#if showDialer}
-            <Dialer on:call={handleDialerCall} on:close={() => showDialer = false} />
-          {:else}
-            <div class="card is-translucent-black">
-              <div class="card-content">
-                <div class="content has-text-centered">
-                  <button 
-                    class="button is-success is-large is-rounded"
-                    on:click={toggleDialer}
-                  >
-                    <span class="icon">
-                      <i class="mdi mdi-phone-plus"></i>
-                    </span>
-                    <span>Manual Dial</span>
-                  </button>
+        <!-- Dialer Column -->    
+        <div class="column is-3">
+          <div class="dialer-far-right">
+            {#if showDialer}
+              <Dialer on:call={handleDialerCall} on:close={() => showDialer = false} />
+            {:else}
+              <div class="card is-translucent-black">
+                <div class="card-content">
+                  <div class="content has-text-centered">
+                    <button 
+                      class="button is-success is-large is-rounded"
+                      on:click={toggleDialer}
+                    >
+                      <span class="icon">
+                        <i class="mdi mdi-phone-plus"></i>
+                      </span>
+                      <span>Manual Dial</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          {/if}
+            {/if}
+          </div>
         </div>
-      
-      
       </div>
     </div>
     <!-- original container
@@ -305,5 +305,19 @@
 
   #messaging-model :global(.title) {
     @extend .has-text-white;
+  }
+
+  #body-widgets .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 2rem; /* Add some padding so content doesn't touch edges */
+  }
+
+  .dialer-far-right {
+    margin-left: auto;
+    max-width: 320px;
+    float: right;
+    padding-right: 1rem; /* Add some space from the edge */
   }
 </style>
