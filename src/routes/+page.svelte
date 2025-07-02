@@ -112,7 +112,7 @@
     console.log('User selected:', user);
     const listofPhoneNumbers = user.phoneNumbers;
     console.log('List of user phone numbers',listofPhoneNumbers);
-    const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value;
+    const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value.replace(/\s+/g, '');
     if (workExtension) {
       console.log('Dialing:', workExtension);
       handleDial(workExtension);
