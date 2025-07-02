@@ -331,8 +331,46 @@
   .search-bottom {
     margin-top: auto; /* This pushes it to the bottom */
   }
+  
+  /* Make the person cards section shorter */
   .person-card-bottom {
     margin-top: auto; /* This pushes it to the bottom */
+    max-height: 250px !important;
+    overflow: hidden;
+  }
+
+  /* Make person cards smaller and ensure name is always visible */
+  .person-card-bottom :global(.card) {
+    transform: scale(0.7); /* Made smaller from 0.85 */
+    transform-origin: center;
+    max-height: 200px; /* Limit card height */
+    overflow: visible; /* Allow name to show if it extends */
+  }
+
+  /* Reduce card content padding */
+  .person-card-bottom :global(.card-content) {
+    padding: 0.75rem 1rem !important; /* Reduced padding */
+  }
+
+  /* Make avatar smaller */
+  .person-card-bottom :global(.image) {
+    width: 80px !important; /* Make avatar smaller */
+    height: 80px !important;
+  }
+
+  /* Ensure name text is always visible and properly sized */
+  .person-card-bottom :global(.title) {
+    font-size: 0.9rem !important; /* Smaller font */
+    line-height: 1.2 !important;
+    margin-bottom: 0.25rem !important;
+    overflow: visible !important;
+    white-space: normal !important; /* Allow text wrapping */
+    text-overflow: visible !important;
+  }
+
+  /* Adjust any buttons or icons to be smaller */
+  .person-card-bottom :global(.button) {
+    transform: scale(0.8);
   }
 
   .dialer-column {
