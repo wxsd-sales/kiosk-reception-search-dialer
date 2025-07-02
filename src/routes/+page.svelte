@@ -152,12 +152,13 @@
     </nav>
   </div>
   <!-- hero-head end -->
-  <!-- hero-body start -->
-  <div id="body-widgets" class="hero-body py-2">
-    <div class="container">
-      <div class="columns is-vcentered is-flex-grow-1">
-        <!-- Directory Search Column (leftmost) -->
-        <div class="column is-narrow">
+ <!-- hero-body start -->
+<div id="body-widgets" class="hero-body py-2">
+  <div class="container">
+    <div class="columns is-vcentered is-flex-grow-1">
+      <!-- Search Column (leftmost, positioned at bottom) -->
+      <div class="column search-column" style="flex: 0 0 400px;">
+        <div class="search-bottom">
           <Search 
             searchResults={searchResults}
             isLoading={isSearching}
@@ -165,57 +166,49 @@
             on:userSelected={handleUserSelected}
           />
         </div>
-        <!-- Person Cards Column -->
-        <div class="column">
-          <div class="columns is-multiline is-centered">
-            {#each people as person}
-              <div class="column is-6 is-flex is-justify-content-center">
+      </div>
+      
+      <!-- Person Cards Column (center area) -->
+      <div class="column">
+        <div class="columns is-multiline is-centered">
+          {#each people as person}
+            <div class="column is-4 is-flex is-justify-content-center">
+              <div class="person-card-small">
                 <PersonCard email={person[0]} {getPersonResponse} onDial={() => handleDial(person?.[1] ?? person[0])} />
               </div>
-            {/each}
-          </div>
+            </div>
+          {/each}
         </div>
-        
-        <!-- Dialer Column -->    
-        <div class="column is-3">
-          <div class="dialer-far-right">
-            {#if showDialer}
-              <Dialer on:call={handleDialerCall} on:close={() => showDialer = false} />
-            {:else}
-              <div class="card is-translucent-black">
-                <div class="card-content">
-                  <div class="content has-text-centered">
-                    <button 
-                      class="button is-success is-large is-rounded"
-                      on:click={toggleDialer}
-                    >
-                      <span class="icon">
-                        <i class="mdi mdi-phone-plus"></i>
-                      </span>
-                      <span>Manual Dial</span>
-                    </button>
-                  </div>
+      </div>
+      
+      <!-- Dialer Column (far right) -->    
+      <div class="column dialer-column" style="flex: 0 0 350px;">
+        <div class="dialer-far-right">
+          {#if showDialer}
+            <Dialer on:call={handleDialerCall} on:close={() => showDialer = false} />
+          {:else}
+            <div class="card is-translucent-black">
+              <div class="card-content">
+                <div class="content has-text-centered">
+                  <button 
+                    class="button is-success is-large is-rounded"
+                    on:click={toggleDialer}
+                  >
+                    <span class="icon">
+                      <i class="mdi mdi-phone-plus"></i>
+                    </span>
+                    <span>Manual Dial</span>
+                  </button>
                 </div>
               </div>
-            {/if}
-          </div>
+            </div>
+          {/if}
         </div>
       </div>
     </div>
-    <!-- original container
-    <div class="container">
-      <div class="columns is-multiline is-centered is-vcentered is-flex-grow-1">
-        {#each people as person}
-          <div class="column is-4 is-flex is-justify-content-center">
-            <PersonCard email={person[0]} {getPersonResponse} onDial={() => handleDial(person?.[1] ?? person[0])} />
-          </div>
-        {/each}
-      </div>
-    </div>
-    -->
-  
   </div>
-  <!-- hero-body end -->
+</div>
+<!-- hero-body end -->
   <!-- hero-foot start -->
   <div id="foot-widgets" class="hero-foot" />
 </section>
@@ -315,9 +308,33 @@
   }
 
   .dialer-far-right {
-    margin-left: auto;
+    width: 100%;
     max-width: 320px;
-    float: right;
-    padding-right: 1rem; /* Add some space from the edge */
   }
+
+  .person-card-small :global(.card) {
+    transform: scale(0.85);
+    transform-origin: center;
+    /* max-height: 280px;  */
+    overflow: hidden;
+  }
+
+/* Make search column flex and push search to bottom */
+  .search-column {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 70vh;
+  }
+
+  .search-bottom {
+    margin-top: auto; /* This pushes it to the bottom */
+  }
+
+  /* Ensure dialer column has proper spacing */
+  .dialer-column {
+    display: flex !important;
+    justify-content: flex-end;
+}
+
 </style>
