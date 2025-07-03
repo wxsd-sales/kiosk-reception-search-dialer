@@ -129,7 +129,7 @@
           isSearching = false; // Stop loading
         }
         else {
-          console.error ('Unexpected API Response')
+          console.log ('No match');
           searchResults = [];
         }
       })
