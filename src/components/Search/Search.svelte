@@ -109,10 +109,10 @@
                     </div>
                     <div class="media-content">
                       <p class="has-text-white is-size-6 mb-1">
-                        {user.displayName || user.name || 'Unknown'}
+                        {user.displayName || user.Name || 'Unknown'}
                       </p>
                       <p class="has-text-grey-light is-size-7">
-                        {user.email || user.username || ''}
+                        {user.Email || user.username || ''}
                       </p>
                       {#if user.department}
                         <p class="has-text-grey-light is-size-7">

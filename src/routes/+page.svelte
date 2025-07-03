@@ -92,27 +92,40 @@
     
     // Set loading state
     isSearching = true;
-
-    fetch(webexApiUrl + `/people?displayName=${query}&callingData=true`, {
-      method: 'GET',
-      headers: { 'Authorization': 'Bearer ' + webexToken, 'Content-Type': 'application/json' }
+    const data = {
+      "deviceId": deviceId,
+      "arguments": {
+        "PhonebookType": "Corporate",
+        "SearchString": query
+      }
+    }
+    fetch(webexApiUrl + '/xapi/command/Phonebook.Search', {
+      method: 'post',
+      headers: { 'Authorization': 'Bearer ' + webexToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify (data)
     })
       .then((r) => (r.status >= 400 ? Promise.reject(r) : r))
       .then((r) => r.json())
       .then((r) => {
-        searchResults = r.items;
-        console.log(searchResults);
+        searchResults = r.result.Contact;
+        console.log('search results', searchResults);
       })
       .catch((e) => console.error(e));
-    
   }
 
   function handleUserSelected(event) {
     const { user } = event.detail;
+
+    // We get an array of Contact Methods
+    // For every item in the array, search is there is a key = 'Device' that is = 'Work'
+    // if it is, get the number
     console.log('User selected:', user);
-    const listofPhoneNumbers = user.phoneNumbers;
-    console.log('List of user phone numbers',listofPhoneNumbers);
-    const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value.replace(/\s+/g, '');
+    console.log ('Array of contact methods:', user.ContactMethod);
+    const workExtension = user.ContactMethod.find(cm => cm?.Device === 'Work')?.Number;
+    console.log ('extension:', workExtension);
+
+    // const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value.replace(/\s+/g, '');
+    // Phone Search API already does blank space removal!
     if (workExtension) {
       console.log('Dialing:', workExtension);
       handleDial(workExtension);
