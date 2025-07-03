@@ -187,7 +187,7 @@
           {#if showDialer}
             <Dialer on:call={handleDialerCall} on:close={() => showDialer = false} />
           {:else}
-            <div class="card is-translucent-black">
+            <div class="card is-translucent-black" style="height:100%">
               <div class="card-content">
                 <div class="content has-text-centered">
                   <button 
@@ -197,7 +197,7 @@
                     <span class="icon">
                       <i class="mdi mdi-phone-plus"></i>
                     </span>
-                    <span>Manual Dial</span>
+                    <span>Manual Dial</span>  
                   </button>
                 </div>
               </div>
@@ -341,7 +341,7 @@
 
   /* Make person cards smaller and ensure name is always visible */
   .person-card-bottom :global(.card) {
-    transform: scale(0.7); /* Made smaller from 0.85 */
+    transform: scale(0.85); /* Made smaller from 0.85 */
     transform-origin: center;
     max-height: 200px; /* Limit card height */
     overflow: visible; /* Allow name to show if it extends */
@@ -354,15 +354,15 @@
 
   /* Make avatar smaller */
   .person-card-bottom :global(.image) {
-    width: 80px !important; /* Make avatar smaller */
-    height: 80px !important;
+    width: 100px !important; /* Make avatar smaller */
+    height: 100px !important;
   }
 
   /* Ensure name text is always visible and properly sized */
   .person-card-bottom :global(.title) {
-    font-size: 0.9rem !important; /* Smaller font */
+    font-size: 1.2rem !important; /* Smaller font */
     line-height: 1.2 !important;
-    margin-bottom: 0.25rem !important;
+    margin-bottom: 1rem !important;
     overflow: visible !important;
     white-space: normal !important; /* Allow text wrapping */
     text-overflow: visible !important;
