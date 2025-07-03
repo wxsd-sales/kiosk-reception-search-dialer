@@ -34,6 +34,7 @@
   function clearSearch() {
     searchQuery = '';
     dispatch('search', { query: '' });
+    searchResults = [];
   }
 </script>
 

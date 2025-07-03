@@ -89,7 +89,21 @@
   function handleDirectorySearch(event) {
     const { query } = event.detail;
     console.log('Searching for:', query);
-    
+
+    // If query is empty, clear results
+    if (!query.trim()) {
+      searchResults = [];
+      isSearching = false;
+      return;
+    }
+
+    // Only search if query has at least 3 characters
+    if (query.trim().length < 3) {
+      searchResults = [];
+      isSearching = false;
+      return;
+    }
+
     // Set loading state
     isSearching = true;
     const data = {
@@ -107,12 +121,24 @@
       .then((r) => (r.status >= 400 ? Promise.reject(r) : r))
       .then((r) => r.json())
       .then((r) => {
-        searchResults = r.result.Contact;
-        console.log('search results', searchResults);
+        console.log ('PhoneBook Search APi response:', r);
+        // if there is no match, API will still return: { "deviceId": "aa..bb", "result": {}
+        if (r && r.result.Contact) {
+          searchResults = r.result.Contact;
+          console.log('search results', searchResults);
+          isSearching = false; // Stop loading
+        }
+        else {
+          console.error ('Unexpected API Response')
+          searchResults = [];
+        }
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        console.error(e);
+        searchResults = [];
+        isSearching = false; 
+      });
   }
-
   function handleUserSelected(event) {
     const { user } = event.detail;
 
