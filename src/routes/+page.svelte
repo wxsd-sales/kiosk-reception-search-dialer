@@ -221,7 +221,7 @@
       </div>
       
       <!-- Dialer Column (far right) -->    
-      <div class="column dialer-column" style="flex: 0 0 350px;">
+      <div class="column dialer-column" style="flex: 0 0 420px;">
         <div class="dialer-far-right">
           {#if showDialer}
             <Dialer on:call={handleDialerCall} on:close={() => showDialer = false} />

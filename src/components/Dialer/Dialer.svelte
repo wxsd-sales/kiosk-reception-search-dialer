@@ -296,7 +296,7 @@
   .keypad {
     display: grid;
     gap: 0.3rem;
-    max-width: 320px;
+    max-width: 400px;
     margin: 0 auto;
   }
 
@@ -340,7 +340,7 @@
   }
 
   .alpha-keypad {
-    max-width: 320px;
+    max-width: 400px;
     margin: 0 auto;
   }
 
