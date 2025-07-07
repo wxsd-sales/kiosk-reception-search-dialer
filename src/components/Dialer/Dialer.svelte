@@ -7,9 +7,7 @@
   
   let currentNumber = initialNumber;
   let callHistory: string[] = [];
-  let isAlphanumericMode = false;
-  let isShiftMode = false;
-  
+  let isAlphanumericMode = false;  
   
   // Enhanced keypad with alphanumeric support
   const numericKeypad = [
@@ -29,27 +27,31 @@
 
   // Alphanumeric keypad with 4 rows
   const alphanumericRows = [
-    // Row 1 - 6 buttons
+    // Row 1: 10 buttons
     [
-      { char: 'Q', alt: '1' }, { char: 'W', alt: '2' }, { char: 'E', alt: '3' },
-      { char: 'R', alt: '4' }, { char: 'T', alt: '5' }, { char: 'Y', alt: '6' }
+      { char: 'Q'}, { char: 'W'}, { char: 'E'},
+      { char: 'R'}, { char: 'T'}, { char: 'Y'},
+      { char: 'U'}, { char: 'I'}, { char: 'O'},
+      { char: 'P'}
     ],
-    // Row 2 - 6 buttons  
+    // Row 2: 9 buttons  
     [
-      { char: 'U', alt: '7' }, { char: 'I', alt: '8' }, { char: 'O', alt: '9' },
-      { char: 'A', alt: '@' }, { char: 'S', alt: '.' }, { char: 'D', alt: '-' }
+      
+      { char: 'A'}, { char: 'S'}, { char: 'D',},
+      { char: 'F'}, { char: 'G'}, { char: 'H'},
+      { char: 'J'}, { char: 'K'}, { char: 'L'}
     ],
-    // Row 3 - 6 buttons
+    // Raw 3: 7 buttons
     [
-      { char: 'F', alt: '_' }, { char: 'G', alt: '+' }, { char: 'H', alt: '=' },
-      { char: 'J', alt: ':' }, { char: 'K', alt: ';' }, { char: 'L', alt: '*' }
+      { char: 'Z'}, { char: 'X'}, { char: 'C'},
+      { char: 'V',}, { char: 'B'}, { char: 'N'},
+      { char: 'M'}
     ],
-    // Row 4 - 8 buttons
-    [
-      { char: 'Z', alt: '#' }, { char: 'X', alt: ',' }, { char: 'C', alt: '/' },
-      { char: 'V', alt: '?' }, { char: 'B', alt: '&' }, { char: 'N', alt: '%' },
-      { char: 'M', alt: '!' }, { char: 'P', alt: '0' }
-    ]
+     // Raw 4: 2 buttons
+     [
+      { char: ' '}, { char: '@'}
+    ],
+
   ];
 
   function addDigit(digit: string) {
@@ -64,18 +66,13 @@
     currentNumber = '';
   }
 
-  function addCharacter(char: string, alt: string) {
+  function addCharacter(char: string) {
   // Use alt character if shift is active, otherwise use main character
-    currentNumber += isShiftMode ? alt : char.toLowerCase();
+    currentNumber += char.toLowerCase();
   }
 
   function toggleMode() {
     isAlphanumericMode = !isAlphanumericMode;
-    isShiftMode = false;
-  }
-
-  function toggleShift() {
-    isShiftMode = !isShiftMode;
   }
 
   function formatPhoneNumber(number: string): string {
@@ -120,21 +117,6 @@
           </div>
         </div>
         <div class="level-right">
-          <!-- Add shift button (only show in alphanumeric mode) -->
-          {#if isAlphanumericMode}
-            <div class="level-item">
-              <button 
-                class="button is-small {isShiftMode ? 'is-warning' : 'is-dark'}"
-                on:click={toggleShift}
-                title="Toggle special characters"
-              >
-                <span class="icon is-small">
-                  <i class="mdi mdi-keyboard-variant"></i>
-                </span>
-                <span>{isShiftMode ? 'ALT' : 'SHIFT'}</span>
-              </button>
-            </div>
-          {/if}
           <div class="level-item">
             <button 
               class="button is-small {isAlphanumericMode ? 'is-info' : 'is-dark'}"
@@ -168,17 +150,10 @@
             class="input has-text-centered has-background-dark has-text-white"
             type="text"
             bind:value={currentNumber}
-            placeholder={isAlphanumericMode ? (isShiftMode ? "Special chars mode..." : "Letter mode...") : "Enter number..."}
+            placeholder={isAlphanumericMode ? "Letter mode..." : "Enter number..."}
             readonly
           />
         </div>
-        <p class="help has-text-centered has-text-grey-light">
-          {#if isAlphanumericMode}
-            {isShiftMode ? 'Special Characters Mode' : 'Letters Mode'}
-          {:else}
-            {formatPhoneNumber(currentNumber)}
-          {/if}
-        </p>
       </div>
       
       <!-- Dynamic Keypad -->
@@ -190,16 +165,11 @@
                 {#each row as button}
                   <button 
                     class="button is-small keypad-button has-background-grey-darker has-text-white"
-                    on:click={() => addCharacter(button.char, button.alt)}
+                    on:click={() => addCharacter(button.char)}
                   >
-                    <div class="keypad-content">
-                      <div class="keypad-number">
-                        {isShiftMode ? button.alt : button.char}
-                      </div>
-                      <div class="keypad-letters">
-                        {isShiftMode ? button.char : button.alt}
-                      </div>
-                    </div>
+                  <div class="keypad-content">
+                    <div class="keypad-number">{button.char}</div>
+                  </div>
                   </button>
                 {/each}
               </div>
@@ -213,12 +183,12 @@
                 class="button is-small keypad-button has-background-grey-darker has-text-white"
                 on:click={() => addDigit(button.number)}
               >
-                <div class="keypad-content">
-                  <div class="keypad-number">{button.number}</div>
-                  {#if button.letters}
-                    <div class="keypad-letters">{button.letters}</div>
-                  {/if}
-                </div>
+              <div class="keypad-content">
+                <div class="keypad-number">{button.number}</div>
+                {#if button.letters}
+                  <div class="keypad-letters">{button.letters}</div>
+                {/if}
+              </div>
               </button>
             {/each}
           </div>
