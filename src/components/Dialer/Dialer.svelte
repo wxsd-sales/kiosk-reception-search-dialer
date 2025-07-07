@@ -49,7 +49,7 @@
     ],
      // Raw 4: 2 buttons
      [
-      { char: ' '}, { char: '@'}
+      { char: '@'},{ char: '.'},{ char: '-'}, { char: '_'}, { char: '/'}
     ],
 
   ];
@@ -157,7 +157,7 @@
       </div>
       
       <!-- Dynamic Keypad -->
-      <div class="keypad mb-4">
+      <div class="keypad mb-4 is-justify-content-center">
         {#if isAlphanumericMode}
           <div class="alpha-keypad">
             {#each alphanumericRows as row}
@@ -185,9 +185,6 @@
               >
               <div class="keypad-content">
                 <div class="keypad-number">{button.number}</div>
-                {#if button.letters}
-                  <div class="keypad-letters">{button.letters}</div>
-                {/if}
               </div>
               </button>
             {/each}
