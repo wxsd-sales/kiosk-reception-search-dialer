@@ -22,10 +22,11 @@
   const background = $page.url.searchParams.get('background') ?? 'photo-1568738009519-52d1bad47858.webp';
   const logo = $page.url.searchParams.get('logo') ?? 'font_rend-removebg-preview.png';
 
-  // Get also the group name and the Service App access token
+  // Get also the group name, Service App access token and ORG Id
   const groupName = $page.url.searchParams.get('groupName');
   const accessToken = $page.url.searchParams.get('accessToken');
-
+  const orgId = $page.url.searchParams.get('orgId');
+  
   if (!people || people.length === 0) {
     throw new Error ('Missing people as URL parameter');
   }
@@ -108,12 +109,10 @@
       return;
     }
 
+    // Search users by First Name
     // Set loading state
     isSearching = true;
-
-    // Get Group ID using the Service App Token
-    fetch('https://webexapis.com/v1/groups/', {
-      method: 'get',
+    fetch(`https://webexapis.com/identity/scim/${orgId}/v2/Users?filter=name.givenName sw "${query}"&returnGroups=true&includeGroupDetails=true`, {
       headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' }
     })
       .then((r) => { 
@@ -122,98 +121,62 @@
       })
       .then((r) => r.json ())
       .then((r) => {
-        console.log ('List of Groups:', r);
-        if (r && r.groups) { // this would need to be tested on an ORG with no groups
-          const matchingGroup = r.groups.find( (group) => group?.displayName === groupName)
-          const groupId = matchingGroup.id;
-          // Get Group members
-          fetch(`https://webexapis.com/v1/groups/${groupId}/members`, {
-            method: 'get',
-            headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' }
-          })
-            .then((r) => { 
-              if (r.status >= 400) throw r;
-              return r;
-            })
-            .then((r) => r.json ())
-            .then((r) => {
-              if (r && r.members) {
-                const groupMembers = r.members;
-                console.log ('Group members:', groupMembers);
-              }
-              else {
-                console.log('No members')
-                console.log (r);
-              }
-              
-            })
-            .catch ((e) => {
-              console.error (e);
-            })
+        if (r && r.Resources) {
+          // Check if users returned are members of the group
+          const foundUsers = r.Resources;
+          const matchingUsers = foundUsers.filter((user) => user.groups?.find((group) => group?.display === groupName));
+          console.log (`${matchingUsers.length} Users matched`);
+          matchingUsers.forEach (user => 
+            console.log (user.displayName)
+          )
+          searchResults = matchingUsers;
+          isSearching = false;
         }
         else {
-          console.log ('No matching groups');
+          console.log ('No resources');
         }
       })
-      .catch((e) => {
-        console.error(e);
+      .catch ((e) => {
+        console.error (e);
       })
-
-
-    const data = {
-      "deviceId": deviceId,
-      "arguments": {
-        "PhonebookType": "Corporate",
-        "SearchString": query
-      }
-    }
-    fetch(webexApiUrl + '/xapi/command/Phonebook.Search', {
-      method: 'post',
-      headers: { 'Authorization': 'Bearer ' + webexToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify (data)
-    })
-      .then((r) => (r.status >= 400 ? Promise.reject(r) : r))
-      .then((r) => r.json())
-      .then((r) => {
-        console.log ('PhoneBook Search APi response:', r);
-        // if there is no match, API will still return: { "deviceId": "aa..bb", "result": {}
-        if (r && r.result.Contact) {
-          searchResults = r.result.Contact;
-          console.log('search results', searchResults);
-          isSearching = false; // Stop loading
-        }
-        else {
-          console.log ('No match');
-          searchResults = [];
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-        searchResults = [];
-        isSearching = false; 
-      });
+     
+            /** const arrayOfUsers = r.Resources;
+            const matchingUsers = arrayOfUsers.filter((user) => user.groups?.find((group) => group?.display === groupName));
+            console.log (`${matchingUsers.length} Users matched`);
+            matchingUsers.forEach (user => 
+              console.log (user.displayName)
+            );
+            // matchingUsers contains all members of the group.
+            searchResults = matchingUsers;
+            isSearching = false; // Stop loading
+             
+            // Now base64 encode them to get User ids
+            const encodedUserIds = matchingUsers.map ((user) => {
+              let stringToEncode = `ciscospark://us/PEOPLE/${user.id}`;
+              return btoa(stringToEncode).replace(/=/g, ''); // remove the padding =
+            })
+            
+      
+          } **/
   }
+  
   function handleUserSelected(event) {
     const { user } = event.detail;
-
-    // We get an array of Contact Methods
-    // For every item in the array, search is there is a key = 'Device' that is = 'Work'
-    // if it is, get the number
-    console.log('User selected:', user);
-    console.log ('Array of contact methods:', user.ContactMethod);
-    const workExtension = user.ContactMethod.find(cm => cm?.Device === 'Work')?.Number;
-    console.log ('extension:', workExtension);
-
-    // const workExtension = listofPhoneNumbers.find( (item) => item.type === 'work')?.value.replace(/\s+/g, '');
-    // Phone Search API already does blank space removal!
-    if (workExtension) {
-      console.log('Dialing:', workExtension);
-      handleDial(workExtension);
-      isSearching = false;
+    // We get a user Object
+    if (user.phoneNumbers) {
+      const arrayOfPhoneNumbers = user.phoneNumbers;
+      const workExtension = arrayOfPhoneNumbers.find((number) => number?.type === 'work')?.value.replace(/\s+/g, ''); // blank space removal
+      if (workExtension) {
+        console.log('Dialing:', workExtension);
+        handleDial(workExtension);
+        isSearching = false;
+      }
+      // TODO: Implement what happens when a user is selected
+      // Maybe show their details, dial them, etc.
     }
-    
-    // TODO: Implement what happens when a user is selected
-    // Maybe show their details, dial them, etc.
+    else {
+      console.log ("Users has no work numbers");
+    }
   }
 
 </script>
