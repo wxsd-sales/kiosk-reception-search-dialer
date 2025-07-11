@@ -22,11 +22,15 @@
   const background = $page.url.searchParams.get('background') ?? 'photo-1568738009519-52d1bad47858.webp';
   const logo = $page.url.searchParams.get('logo') ?? 'font_rend-removebg-preview.png';
 
+  // Get also the group name and the Service App access token
+  const groupName = $page.url.searchParams.get('groupName');
+  const accessToken = $page.url.searchParams.get('accessToken');
+
   if (!people || people.length === 0) {
     throw new Error ('Missing people as URL parameter');
   }
   else {
-    console.log('Vars loaded: ', {webexToken, deviceId, owmToken, owmCityId, people});
+    console.log('Vars loaded: ', {webexToken, deviceId, owmToken, owmCityId, people, groupName, accessToken});
   }
  
   const getWeatherResponse = (cityId: number, units: 'imperial' | 'standard') =>
@@ -106,6 +110,56 @@
 
     // Set loading state
     isSearching = true;
+
+    // Get Group ID using the Service App Token
+    fetch('https://webexapis.com/v1/groups/', {
+      method: 'get',
+      headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' }
+    })
+      .then((r) => { 
+        if (r.status >= 400) throw r;
+        return r;
+      })
+      .then((r) => r.json ())
+      .then((r) => {
+        console.log ('List of Groups:', r);
+        if (r && r.groups) { // this would need to be tested on an ORG with no groups
+          const matchingGroup = r.groups.find( (group) => group?.displayName === groupName)
+          const groupId = matchingGroup.id;
+          // Get Group members
+          fetch(`https://webexapis.com/v1/groups/${groupId}/members`, {
+            method: 'get',
+            headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' }
+          })
+            .then((r) => { 
+              if (r.status >= 400) throw r;
+              return r;
+            })
+            .then((r) => r.json ())
+            .then((r) => {
+              if (r && r.members) {
+                const groupMembers = r.members;
+                console.log ('Group members:', groupMembers);
+              }
+              else {
+                console.log('No members')
+                console.log (r);
+              }
+              
+            })
+            .catch ((e) => {
+              console.error (e);
+            })
+        }
+        else {
+          console.log ('No matching groups');
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+
+
     const data = {
       "deviceId": deviceId,
       "arguments": {
@@ -252,71 +306,6 @@
   <div id="foot-widgets" class="hero-foot" />
 </section>
 
-<!--{#if activePersonModel != null}-->
-<!--  <div id="messaging-model" transition:fade={{ duration: 150 }}>-->
-<!--    <Modal isActive={activePersonModel != null} on:click={() => (activePersonModel = undefined)}>-->
-<!--      <figure class="image is-4by5">-->
-<!--        <div class="has-ratio">-->
-<!--          <PersonCard {...activePersonModel}>-->
-<!--            <div class="field has-addons">-->
-<!--              <div class="control has-icons-left is-expanded">-->
-<!--                <input-->
-<!--                  class="input is-rounded is-medium"-->
-<!--                  placeholder="Your Name"-->
-<!--                  bind:value={from}-->
-<!--                  disabled={isLoading}-->
-<!--                />-->
-<!--                <span class="icon is-large is-left">-->
-<!--                  <i class="mdi mdi-24px mdi-account" />-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="control">-->
-<!--                <button-->
-<!--                  class="button is-rounded is-medium has-background-white"-->
-<!--                  type="button"-->
-<!--                  on:click={() => (from = undefined)}-->
-<!--                >-->
-<!--                  <span class="icon">-->
-<!--                    <i class="mdi mdi-24px mdi-backspace" />-->
-<!--                  </span>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="field is-grouped">-->
-<!--              <div class="control has-icons-left is-expanded">-->
-<!--                <input-->
-<!--                  class="input is-rounded is-medium is-static has-text-white"-->
-<!--                  placeholder="Your Name"-->
-<!--                  disabled={isLoading}-->
-<!--                  readonly-->
-<!--                  value="Notify {activePersonModel.name} that you have arrived"-->
-<!--                />-->
-<!--                <span class="icon is-large is-left">-->
-<!--                  <i class="mdi mdi-24px mdi-text" />-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="control">-->
-<!--                <button-->
-<!--                  class="button is-primary has-background-dark is-inverted is-rounded is-medium"-->
-<!--                  type="button"-->
-<!--                  disabled={from == null || from.length === 0}-->
-<!--                  class:is-loading={isLoading}-->
-<!--                  on:click={handleMessageSend}-->
-<!--                >-->
-<!--                  <span>Send</span>-->
-<!--                  <span class="icon">-->
-<!--                    <i class="mdi mdi-24px mdi-send" />-->
-<!--                  </span>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </PersonCard>-->
-<!--        </div>-->
-<!--      </figure>-->
-<!--    </Modal>-->
-<!--  </div>-->
-
-<!--{/if}-->
 <style lang="scss">
   @use 'bulma/sass/helpers/typography';
   @use 'bulma/sass/helpers/color';
