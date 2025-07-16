@@ -218,6 +218,7 @@
           <Search 
             searchResults={searchResults}
             isLoading={isSearching}
+            groupName={groupName}
             on:search={handleDirectorySearch}
             on:userSelected={handleUserSelected}
           />

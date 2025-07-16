@@ -4,6 +4,7 @@
   export let placeholder = 'Search directory...';
   export let searchResults = [];
   export let isLoading = false;
+  export let groupName = '';
 
   const dispatch = createEventDispatcher();
 
@@ -47,7 +48,7 @@
           <span class="icon">
             <i class="mdi mdi-account-search"></i>
           </span>
-          Directory Search
+          Directory Search in group: {groupName ? `"${groupName}"` : ''}
         </h2>
       </div>
 
