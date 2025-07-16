@@ -213,7 +213,7 @@
   <div class="container">
     <div class="columns is-vcentered is-flex-grow-1">
       <!-- Search Column (leftmost, positioned at bottom) -->
-      <div class="column search-column" style="flex: 0 0 700px;">
+      <div class="column search-column" style="flex: 0 0 600px;">
         <div class="search-bottom">
           <Search 
             searchResults={searchResults}
