@@ -17,7 +17,7 @@ const config = {
 
   kit: {
     paths: {
-      base: dev ? '' : '/kiosk-reception-demo' 
+      base: dev ? '' : '/kiosk-reception-search-dialer-demo' 
     },
     appDir: 'internal',
     adapter: adapter({
