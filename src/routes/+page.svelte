@@ -31,7 +31,7 @@
     throw new Error ('Missing people as URL parameter');
   }
   else {
-    console.log('Vars loaded: ', {webexToken, deviceId, owmToken, owmCityId, people, groupName, accessToken});
+    console.log('Vars loaded: ', {webexToken, deviceId, owmToken, owmCityId, people, groupName, accessToken, orgId});
   }
  
   const getWeatherResponse = (cityId: number, units: 'imperial' | 'standard') =>
