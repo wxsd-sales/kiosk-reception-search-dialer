@@ -9,7 +9,7 @@ This application allows you to customize the contact cards, brand logo, backgrou
 
 1. Manual Dialer
 
-   It support numeric dialing:
+   It supports numeric dialing:
 
    ![dialer](documentation/images/dialer-number.png)
 
@@ -19,9 +19,9 @@ This application allows you to customize the contact cards, brand logo, backgrou
 
 2. Directory Search
 
-This search is based on the SCIM 2 Admin API, and is restricted to a specific Control Hub group. So, it will show users only members of the group:
+   This search is based on the SCIM 2 Admin API, and is restricted to a specific Control Hub group. So, it will show users only members of the group:
 
-![alt text](documentation/images/search.png)
+   ![alt text](documentation/images/search.png)
 
 ## Setup
 
