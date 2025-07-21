@@ -2,7 +2,7 @@
 
 ## Overview
 
-This application allows you to customize the contact cards, brand logo, background, etc. that make up the UI/controls of a RoomOS device in PWA/Kiosk device. It is based on https://github.com/wxsd-sales/kiosk-reception-demo, and is adding two new capabilities
+This application allows you to customize the contact cards, brand logo, background, etc. that make up the UI controls of a RoomOS device in PWA/Kiosk device. It is based on https://github.com/wxsd-sales/kiosk-reception-demo, and is adding two new capabilities.
 
 
 ## New capabilities
@@ -15,13 +15,13 @@ This application allows you to customize the contact cards, brand logo, backgrou
 
    And alpha-numeric dialing:
 
-   ![alt text](documentation/images/dialer-alpha.png)
+   ![dialer alpha](documentation/images/dialer-alpha.png)
 
 2. Directory Search
 
    This search is based on the SCIM 2 Admin API, and is restricted to a specific Control Hub group. So, it will show users only members of the group:
 
-   ![alt text](documentation/images/search.png)
+   ![search](documentation/images/search.png)
 
 ## Setup
 
@@ -33,7 +33,7 @@ These instructions assume that you have administrator access to an Org's Webex C
 
 3. Note the device identifier by executing the [List Devices API request](https://developer.webex.com/docs/api/v1/devices/list-devices) on the Webex developer portal, it’s the `id` field in the response as `DEVICE_ID`.
 
-4. SCIM 2 API requires the use of an Auth Token. In this example, we created a [Service App](https://developer.webex.com/admin/docs/service-apps) to get an Access Token. Save it as `SERVICEAPP_TOKEN`
+4. SCIM 2 API requires the use of an Auth Token. In this example, we created a [Service App](https://developer.webex.com/admin/docs/service-apps) to get an Access Token. Save it as `SERVICEAPP_TOKEN`.
 
 5. Get your Webex ORG Id.
 
@@ -44,9 +44,9 @@ These instructions assume that you have administrator access to an Org's Webex C
 ```text
 https://wxsd-sales.github.io/kiosk-reception-search-dialer/?people=johndoe@workspace.wxsd.us:6661&background=https://cf-images.us-east-1.prod.boltdns.net/v1/static/1384193102001/46e1a133-643e-435c-b073-8fd26be857e7/757bc84f-02c4-4468-b90b-7f097d265106/1280x720/match/image.jpg&logo=https://www.webexone.com/content/dam/www/us/en/images/webexone/2024/save-the-date/webexone24-logo-white.svg&owmCityId=2643743&owmToken=OWM_TOKEN&webexToken=WEBEX_TOKEN&deviceId=DEVICE_ID&accessToken=SERVICEAPP_TOKEN&groupName=GROUP_NAME&orgId=WEBEX_ORGID
 ```
-In this case, we recommend to have a maximum of 2 persons in the `people`parameter, separated by a comma ","
+In this case, we recommend to have a maximum of 2 persons in the `people`parameter, separated by a comma ",".
 
-You can choose your own logo and background images
+You can choose your own logo and background images.
 
 8. Visit the org's [Control Hub device page](https://admin.webex.com/devices), choose your device and make the following changes using the "All configuration" link:
    - Set the value for `NetworkServices > HTTP > Mode` to `HTTP+HTTPS`
